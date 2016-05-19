@@ -1,7 +1,7 @@
 import socket
 import sys
 from thread import *
-
+x=0
 conn=[]
 HOST=''
 PORT = 5190
@@ -42,12 +42,12 @@ def clientthread(conn):
 			conn[0].sendall(reply)
 		conn.close()
 
-for x in xrange(2):
-	conn[x],addr=s.accept()
+while 1:
+	conn[x],addr[x]=s.accept()
 	if conn[0]!=NULL:
-		start_new_thread(clientthread,(Conn))
-	 
-		print 'connected with ' + addr[0] +':' + str(addr[1])
-	 if conn[1]!=NULL:
-		start_new_thread(clientthread,(conn))
+		print 'conected with' + addr[x][0] + ':' +str(addr[x][1])
+		x=1
+	if conn[1]!=NULL:
+		print 'connected with ' + addr[x][0] +':' + str(addr[1][1])
+		start_new_thread(clientthread,(conn,))
 s.close()

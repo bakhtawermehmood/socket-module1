@@ -7,7 +7,7 @@ port= 5190
 s.connect((host,port))
 while True:
 	data=raw_input("enter ...")
-	try
+	try:
 		s.sendall(data)
 	except socket.error:
 		print 'send failed'
