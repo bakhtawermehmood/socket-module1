@@ -1,21 +1,19 @@
 import socket
-import sys
+from thread import *
 
-s= socket.socket()
-host=socket.gethostname()
-port= 5190
+s=socket.socket()
+host =socket.gethostname()
+port=5133
+
 s.connect((host,port))
-while True:
-	data=raw_input("enter ...")
-	try:
-		s.sendall(data)
-	except socket.error:
-		print 'send failed'
-		sys.exit()
-	print 'message send successfully'	
+def clientthread(s):
+	while 1:
 	print s.recv(1024)
 
-	if data=='bye' or s.recv(1024)=='bye':
-		print "exiting..."
-		break
-s.close()
+start_new_thread(clientthread, (s,))
+while(1):
+	data=raw_input('')
+	s.sendall(dta)
+	if str(data) =='exit':
+		s.close
+

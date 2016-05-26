@@ -1,8 +1,6 @@
 import socket
 import sys
 from thread import *
-x=0
-conn=[]
 HOST=''
 PORT = 5190
 s=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
@@ -16,38 +14,31 @@ except socket.error as msg:
 
 print 'socket bind complete'
 
-s.listen(2)
+s.listen(10)
 print 'socket now listening'
-
+conn=[0,0,0,0,0,0,0,0,0,0]
 
 def clientthread(conn):
-	if conn[0]:
-	
-		conn[0].send('welcome to the server\n')
-		while True:
-			data=conn[0].recv(1024)
-			reply = data
-			if not data:
-				break
-			conn[1].sendall(reply)
-		conn.close()
-	 
-	if conn[1]:
-		conn[1].send('welcome to the server\n')
-		while true:
-			data= conn[1].recv(1024)
-			reply=data
-			if not data:
-				break
-			conn[0].sendall(reply)
-		conn.close()
-
+	conn[i].send('welcome to the server. type something and hit enter\n')
+	while True:
+		data=conn[i].recv(1024)
+                if i==0;
+			data='client:' +data
+			conn[1].sendall(data)
+		else:
+			data='client2:' +data
+			conn[0].sendall(data)
+		conn[i].close()
+x=0
+i=0
+arr1=[]
 while 1:
-	conn[x],addr[x]=s.accept()
-	if conn[0]!=NULL:
-		print 'conected with' + addr[x][0] + ':' +str(addr[x][1])
-		x=1
-	if conn[1]!=NULL:
-		print 'connected with ' + addr[x][0] +':' + str(addr[1][1])
-		start_new_thread(clientthread,(conn,))
-s.close()
+        #wait to accept a connection- blocking call
+	conn[i],addr=s.accept()
+	msg='connected client is ' + addr[0] + ':' +str(addr[1])
+	print msg
+	for x in xrange(i):
+        	if x !=i:
+			conn[x].sendall(msg)
+	start_new_thread(clientthread, (conn,i))
+	i=i+1
