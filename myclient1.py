@@ -4,7 +4,7 @@ from thread import *
 
 s = socket.socket()         
 host = socket.gethostname()
-port = 5133               # Reserve a port for your service.
+port = 5188            # Reserve a port for your service.
 
 s.connect((host, port))
 
@@ -12,7 +12,9 @@ def clientthread(s):
     while 1:
 	print s.recv(1024)	
 
-start_new_thread(clientthread ,(s,))			
+start_new_thread(clientthread ,(s,))
+name=raw_input('')
+s.sendall(name) 
 while(1):
 	data= raw_input('')
 	s.sendall(data) 
